@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pokemonentity',
             name='appeared_at',
-            field=models.DateTimeField(default=None),
+            field=models.DateTimeField(),
         ),
         migrations.AddField(
             model_name='pokemonentity',
             name='disappeared_at',
-            field=models.DateTimeField(default=None),
+            field=models.DateTimeField(),
         ),
     ]
