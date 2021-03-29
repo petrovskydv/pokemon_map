@@ -13,13 +13,16 @@ class Pokemon(models.Model):
     def __str__(self):
         return self.title
 
+    def get_image_url(self):
+        return self.image.url if self.image else None
+
 
 class PokemonEntity(models.Model):
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, verbose_name='Покемон')
     lat = models.FloatField('Широта')
     lon = models.FloatField('Долгота')
-    appeared_at = models.DateTimeField('Время появления')
-    disappeared_at = models.DateTimeField('Время исчезновения')
+    appeared_at = models.DateTimeField('Время появления', null=True, blank=True)
+    disappeared_at = models.DateTimeField('Время исчезновения', null=True, blank=True)
     level = models.IntegerField('Уровень', default=0, blank=True)
     health = models.IntegerField('Здоровье', default=0, blank=True)
     strength = models.IntegerField('Атака', default=0, blank=True)
