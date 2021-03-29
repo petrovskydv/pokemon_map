@@ -64,20 +64,25 @@ def show_pokemon(request, pokemon_id):
         'title_jp': pokemon.title_jp,
         'description': pokemon.description,
         'img_url': pokemon.image.url,
-        'next_evolution': {
-            # 'title_ru': ,
-            # 'pokemon_id': ,
-            # 'img_url':
-        },
-        'previous_evolution': {
-            # 'title_ru': ,
-            # 'pokemon_id': ,
-            # 'img_url':
-        }
     }
+    if pokemon.previous_evolution:
+        previous_evolution = {
+            'title_ru': pokemon.previous_evolution.title,
+            'pokemon_id': pokemon.previous_evolution.id,
+            'img_url': pokemon.previous_evolution.image.url
+        }
+        pokemon_json['previous_evolution'] = previous_evolution
+
+    next_evolution_pokemon = pokemon.pokemon_set.all().first()
+    if next_evolution_pokemon:
+        next_evolution = {
+            'title_ru': next_evolution_pokemon.title,
+            'pokemon_id': next_evolution_pokemon.id,
+            'img_url': next_evolution_pokemon.image.url
+        }
+        pokemon_json['next_evolution'] = next_evolution
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-
     pokemons_entity = PokemonEntity.objects.filter(pokemon__id=pokemon_id)
     for pokemon_entity in pokemons_entity:
         add_pokemon(
