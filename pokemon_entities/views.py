@@ -60,9 +60,9 @@ def show_pokemon(request, pokemon_id):
 
     pokemon_json = {
         'title_ru': pokemon.title,
-        # 'title_en': ,
-        # 'title_jp': ,
-        # 'description': ,
+        'title_en': pokemon.title_en,
+        'title_jp': pokemon.title_jp,
+        'description': pokemon.description,
         'img_url': pokemon.image.url,
         'next_evolution': {
             # 'title_ru': ,
