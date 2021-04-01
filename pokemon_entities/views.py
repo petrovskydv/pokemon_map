@@ -69,7 +69,8 @@ def show_pokemon(request, pokemon_id):
     if pokemon.previous_evolution:
         pokemon_json['previous_evolution'] = get_evolution_pokemon(pokemon.previous_evolution)
 
-    next_evolution_pokemon = pokemon.pokemon_set.all().first()
+    next_evolution_pokemon = pokemon.next_evolution.first()
+    print(pokemon.next_evolution.all())
     if next_evolution_pokemon:
         pokemon_json['next_evolution'] = get_evolution_pokemon(next_evolution_pokemon)
 

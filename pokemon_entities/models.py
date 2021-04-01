@@ -12,8 +12,14 @@ class Pokemon(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name='Из кого эволюционирует'
+        verbose_name='Из кого эволюционирует',
+        related_name='next_evolution'
     )
+
+    class Meta:
+        verbose_name = 'Покемон'
+        verbose_name_plural = 'Покемоны'
+
 
     def __str__(self):
         return self.title
@@ -36,3 +42,7 @@ class PokemonEntity(models.Model):
 
     def __str__(self):
         return f'{self.pokemon.title} level:{self.level} lat:{self.lat} lon:{self.lon}'
+
+    class Meta:
+        verbose_name = 'Координаты покемона '
+        verbose_name_plural = 'Координаты покемонов'
