@@ -70,13 +70,12 @@ def show_pokemon(request, pokemon_id):
         pokemon_description['previous_evolution'] = get_evolution_pokemon(pokemon.previous_evolution)
 
     next_evolution_pokemon = pokemon.next_evolution.first()
-    print(pokemon.next_evolution.all())
     if next_evolution_pokemon:
         pokemon_description['next_evolution'] = get_evolution_pokemon(next_evolution_pokemon)
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
-    pokemons_entity = PokemonEntity.objects.filter(pokemon__id=pokemon_id)
-    for pokemon_entity in pokemons_entity:
+    pokemon_entities = pokemon.entities.all()
+    for pokemon_entity in pokemon_entities:
         img_url = None
         if pokemon_entity.pokemon.image:
             img_url = request.build_absolute_uri(pokemon_entity.pokemon.image.url)
